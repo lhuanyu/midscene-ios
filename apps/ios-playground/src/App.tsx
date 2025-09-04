@@ -237,9 +237,9 @@ export default function App() {
                           result
                             ? {}
                             : {
-                              border: '1px solid #0000001f',
-                              borderRadius: '8px',
-                            }
+                                border: '1px solid #0000001f',
+                                borderRadius: '8px',
+                              }
                         }
                       >
                         <PlaygroundResultView
@@ -256,9 +256,7 @@ export default function App() {
                               Don&apos;t worry, just one more step to launch the
                               playground server.
                               <br />
-                              <strong>
-                                npx --yes midscene-ios-playground
-                              </strong>
+                              <strong>npx --yes midscene-ios-playground</strong>
                               <br />
                               And make sure PyAutoGUI server is running on port
                               1412

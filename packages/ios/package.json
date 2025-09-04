@@ -1,6 +1,6 @@
 {
   "name": "midscene-ios",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Midscene.js for iOS automation",
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
@@ -14,17 +14,13 @@
       "types": "./dist/lib/agent.d.ts",
       "import": "./dist/es/agent.js",
       "require": "./dist/lib/agent.js"
-    }
+    },
+    "./bin/server.js": "./bin/server.js"
   },
   "bin": {
     "midscene-ios-server": "./bin/server.js"
   },
-  "files": [
-    "dist/**/*",
-    "bin/**/*",
-    "idb/**/*",
-    "README.md"
-  ],
+  "files": ["dist/**/*", "bin/**/*", "idb/**/*", "README.md"],
   "scripts": {
     "build": "modern build",
     "dev": "modern dev",

@@ -1,18 +1,10 @@
 const path = require('node:path');
 const { spawn } = require('node:child_process');
-const { iOSDevice, iOSAgent } = require('@midscene/ios');
+const { iOSDevice, iOSAgent } = require('midscene-ios');
 const { PLAYGROUND_SERVER_PORT } = require('@midscene/shared/constants');
 const { PlaygroundServer } = require('@midscene/playground');
 
-const staticDir = path.join(
-  __dirname,
-  '..',
-  '..',
-  '..',
-  'apps',
-  'ios-playground',
-  'dist',
-);
+const staticDir = path.join(__dirname, '..', 'static');
 const playgroundServer = new PlaygroundServer(iOSDevice, iOSAgent, staticDir);
 
 // Auto server management
@@ -63,15 +55,8 @@ const startAutoServer = async () => {
 
     console.log(`🚀 Starting PyAutoGUI server on port ${AUTO_SERVER_PORT}...`);
 
-    // Find the auto server script path
-    const autoServerPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'ios',
-      'bin',
-      'server.js',
-    );
+    // Find the auto server script path from midscene-ios package
+    const autoServerPath = require.resolve('midscene-ios/bin/server.js');
 
     // Start the auto server process
     autoServerProcess = spawn('node', [autoServerPath, AUTO_SERVER_PORT], {

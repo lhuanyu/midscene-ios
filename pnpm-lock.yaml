@@ -168,8 +168,8 @@ importers:
         specifier: ^4.21.2
         version: 4.21.2
       midscene-ios:
-        specifier: ^0.1.0
-        version: 0.1.0(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.1.2
+        version: 0.1.2(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       open:
         specifier: 10.1.0
         version: 10.1.0
@@ -4072,8 +4072,8 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
-  midscene-ios@0.1.0:
-    resolution: {integrity: sha512-ILklhRsELS3IY6PDH2XR4zuABe96WIZ/tqySNbws4LxSSBuuVa+OKEsv+laLhy+99KB3O5v245GC7MAGfD7bvg==}
+  midscene-ios@0.1.2:
+    resolution: {integrity: sha512-03p89rFD7DVr1TdkuCjmqp1JiIn28dR1zqqXqe1qZ9jToTiOAbAkKMg4fygCYOkYL4mIxivwjqaiwiivF/N3Qw==}
     hasBin: true
 
   miller-rabin@4.0.1:
@@ -9889,7 +9889,7 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
-  midscene-ios@0.1.0(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3):
+  midscene-ios@0.1.2(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3):
     dependencies:
       '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       '@midscene/shared': 0.27.6(encoding@0.1.13)

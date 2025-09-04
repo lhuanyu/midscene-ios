@@ -1,15 +1,10 @@
 {
   "name": "midscene-ios-playground",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "iOS playground for Midscene",
   "main": "./dist/lib/index.js",
   "types": "./dist/types/index.d.ts",
-  "files": [
-    "dist",
-    "static",
-    "bin",
-    "README.md"
-  ],
+  "files": ["dist", "static", "bin", "README.md"],
   "bin": {
     "midscene-ios-playground": "./bin/ios-playground"
   },
@@ -20,7 +15,7 @@
     "build:watch": "modern build -w -c ./modern.config.ts --no-clear"
   },
   "dependencies": {
-    "midscene-ios": "^0.1.0",
+    "midscene-ios": "^0.1.2",
     "@midscene/playground": "^0.27.6",
     "@midscene/shared": "^0.27.6",
     "@midscene/web": "^0.27.6",
