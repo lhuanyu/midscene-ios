@@ -47,18 +47,18 @@ pnpm test
 
 ```typescript
 import { agentFromPyAutoGUI } from 'midscene-ios';
+import 'dotenv/config';
 
-const main = async () => {  
-  // Create agent
-  const agent = await agentFromPyAutoGUI();
-  
-  // Use AI-powered automation
-  await agent.aiAction('tap the home button');
-  await agent.aiInput('Hello World', 'search field');
-  
-  // Extract data
-  const apps = await agent.aiQuery('string[], get all app names on screen');
-  console.log('Apps:', apps);
+const main = async () => {
+    // Create agent
+    const agent = await agentFromPyAutoGUI();
+
+    // Use AI-powered automation
+    await agent.aiAction('tap the home button');
+
+    // Extract data
+    const apps = await agent.aiQuery('string[], get all app names on screen');
+    console.log('Apps:', apps);
 };
 
 main();
