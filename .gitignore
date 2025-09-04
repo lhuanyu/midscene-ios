@@ -112,7 +112,7 @@ midscene_run/dump
 *.ignore.png
 extension_output
 .cursor
-android-playground/static/
+**/ios-playground/static/
 .cursor
 CLAUDE.md
 .claude

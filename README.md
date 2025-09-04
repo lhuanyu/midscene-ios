@@ -5,7 +5,7 @@ iOS automation SDK and playground for Midscene.js
 ## Packages
 
 - **@midscene-ios** - Core iOS automation SDK
-- **@midscene-ios-playground** - Interactive playground for iOS automation
+- **midscene-ios-playground** - Interactive playground for iOS automation
 
 ## Quick Start
 
@@ -24,7 +24,7 @@ pnpm run build
 ### Run iOS Playground
 
 ```bash
-npx @midscene-ios-playground
+npx midscene-ios-playground
 ```
 
 ## Development
@@ -79,7 +79,7 @@ main();
 The iOS Playground provides a web interface for interactive testing:
 
 ```bash
-npx @midscene-ios-playground
+npx midscene-ios-playground
 ```
 
 This will:
