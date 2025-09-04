@@ -1,4 +1,4 @@
-# @midscene-ios
+# midscene-ios
 
 iOS automation package for Midscene.js with coordinate mapping support for iOS device mirroring.
 
@@ -13,7 +13,7 @@ iOS automation package for Midscene.js with coordinate mapping support for iOS d
 ## Installation
 
 ```bash
-npm install @midscene-ios
+npm install midscene-ios
 ```
 
 ## Prerequisites
@@ -46,7 +46,7 @@ python3 auto_server.py 1412
 First, get the mirror window coordinates using the AppleScript mentioned above, then:
 
 ```typescript
-import { iOSDevice, iOSAgent } from '@midscene-ios';
+import { iOSDevice, iOSAgent } from 'midscene-ios';
 
 const device = new iOSDevice({
   serverPort: 1412,

@@ -4,7 +4,7 @@ iOS automation SDK and playground for Midscene.js
 
 ## Packages
 
-- **@midscene-ios** - Core iOS automation SDK
+- **midscene-ios** - Core iOS automation SDK
 - **midscene-ios-playground** - Interactive playground for iOS automation
 
 ## Quick Start
@@ -46,18 +46,11 @@ pnpm test
 ### Basic iOS Automation
 
 ```typescript
-import { IOSAgent, IOSDevice, getConnectedDevices } from '@midscene-ios';
+import { agentFromPyAutoGUI } from 'midscene-ios';
 
-const main = async () => {
-  // Get connected devices
-  const devices = await getConnectedDevices();
-  const device = new IOSDevice(devices[0].udid);
-  
+const main = async () => {  
   // Create agent
-  const agent = new IOSAgent(device);
-  
-  // Connect to device
-  await device.connect();
+  const agent = await agentFromPyAutoGUI();
   
   // Use AI-powered automation
   await agent.aiAction('tap the home button');
@@ -66,9 +59,6 @@ const main = async () => {
   // Extract data
   const apps = await agent.aiQuery('string[], get all app names on screen');
   console.log('Apps:', apps);
-  
-  // Disconnect
-  await device.disconnect();
 };
 
 main();

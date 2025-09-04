@@ -168,8 +168,8 @@ importers:
         specifier: ^4.21.2
         version: 4.21.2
       midscene-ios:
-        specifier: workspace:*
-        version: link:../ios
+        specifier: ^0.1.0
+        version: 0.1.0(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       open:
         specifier: 10.1.0
         version: 10.1.0
@@ -4072,6 +4072,10 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
+  midscene-ios@0.1.0:
+    resolution: {integrity: sha512-ILklhRsELS3IY6PDH2XR4zuABe96WIZ/tqySNbws4LxSSBuuVa+OKEsv+laLhy+99KB3O5v245GC7MAGfD7bvg==}
+    hasBin: true
+
   miller-rabin@4.0.1:
     resolution: {integrity: sha512-115fLhvZVqWwHPbClyntxEVfVDfl9DLLTuJvq3g2O/Oxi8AiNouAHvDSzHS0viUJc+V5vm3eq91Xwqn9dp4jRA==}
     hasBin: true
@@ -7033,14 +7037,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@langchain/core@0.3.26(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))':
+  '@langchain/core@0.3.26(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.21
-      langsmith: 0.2.15(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
+      langsmith: 0.2.15(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -7070,7 +7074,7 @@ snapshots:
     dependencies:
       '@anthropic-ai/sdk': 0.33.1(encoding@0.1.13)
       '@azure/identity': 4.5.0
-      '@langchain/core': 0.3.26(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
+      '@langchain/core': 0.3.26(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
       '@midscene/recorder': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@midscene/shared': 0.27.6(encoding@0.1.13)
       '@ui-tars/action-parser': 1.2.3
@@ -7078,7 +7082,7 @@ snapshots:
       https-proxy-agent: 7.0.2
       js-yaml: 4.1.0
       jsonrepair: 3.12.0
-      langsmith: 0.3.7(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
+      langsmith: 0.3.7(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
       openai: 4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)
       semver: 7.5.2
       socks-proxy-agent: 8.0.4
@@ -9708,7 +9712,7 @@ snapshots:
       jwa: 2.0.1
       safe-buffer: 5.2.1
 
-  langsmith@0.2.15(openai@4.81.0(encoding@0.1.13)(zod@3.24.3)):
+  langsmith@0.2.15(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)):
     dependencies:
       '@types/uuid': 10.0.0
       commander: 10.0.1
@@ -9719,7 +9723,7 @@ snapshots:
     optionalDependencies:
       openai: 4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)
 
-  langsmith@0.3.7(openai@4.81.0(encoding@0.1.13)(zod@3.24.3)):
+  langsmith@0.3.7(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)):
     dependencies:
       '@types/uuid': 10.0.0
       chalk: 4.1.2
@@ -9884,6 +9888,28 @@ snapshots:
     dependencies:
       braces: 3.0.3
       picomatch: 2.3.1
+
+  midscene-ios@0.1.0(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3):
+    dependencies:
+      '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/shared': 0.27.6(encoding@0.1.13)
+      '@midscene/web': 0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      node-fetch: 3.3.2
+    transitivePeerDependencies:
+      - '@playwright/test'
+      - bufferutil
+      - date-fns
+      - debug
+      - encoding
+      - luxon
+      - moment
+      - playwright
+      - puppeteer
+      - react
+      - react-dom
+      - supports-color
+      - utf-8-validate
+      - ws
 
   miller-rabin@4.0.1:
     dependencies:
