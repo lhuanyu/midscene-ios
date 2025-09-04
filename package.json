@@ -13,9 +13,7 @@
     "check-dependency-version": "check-dependency-version-consistency .",
     "prepare": "simple-git-hooks && husky && pnpm run build"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged"
   },
@@ -26,13 +24,7 @@
     ],
     "package.json": "pnpm run check-dependency-version"
   },
-  "keywords": [
-    "automation",
-    "testing",
-    "ios",
-    "ai",
-    "midscene"
-  ],
+  "keywords": ["automation", "testing", "ios", "ai", "midscene"],
   "author": "",
   "license": "MIT",
   "engines": {

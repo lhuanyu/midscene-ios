@@ -19,12 +19,7 @@
   "bin": {
     "midscene-ios-server": "./bin/server.js"
   },
-  "files": [
-    "lib/**/*",
-    "bin/**/*",
-    "idb/**/*",
-    "README.md"
-  ],
+  "files": ["lib/**/*", "bin/**/*", "idb/**/*", "README.md"],
   "scripts": {
     "build": "modern build",
     "dev": "modern dev",

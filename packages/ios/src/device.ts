@@ -47,16 +47,16 @@ export type IOSDeviceInputOpt = {
 
 export interface PyAutoGUIAction {
   action:
-  | 'click'
-  | 'longpress'
-  | 'move'
-  | 'drag'
-  | 'type'
-  | 'key'
-  | 'hotkey'
-  | 'sleep'
-  | 'screenshot'
-  | 'scroll';
+    | 'click'
+    | 'longpress'
+    | 'move'
+    | 'drag'
+    | 'type'
+    | 'key'
+    | 'hotkey'
+    | 'sleep'
+    | 'screenshot'
+    | 'scroll';
   x?: number;
   y?: number;
   x2?: number;
@@ -158,9 +158,9 @@ export class iOSDevice implements AbstractInterface {
         const element = param.locate;
         const startingPoint = element
           ? {
-            left: element.center[0],
-            top: element.center[1],
-          }
+              left: element.center[0],
+              top: element.center[1],
+            }
           : undefined;
         const scrollToEventName = param?.scrollType;
         if (scrollToEventName === 'untilTop') {
@@ -337,7 +337,7 @@ export class iOSDevice implements AbstractInterface {
       } catch (startError: any) {
         throw new Error(
           `Failed to auto-start Python server: ${startError.message}. ` +
-          `Please manually start the server by running: node packages/ios/bin/server.js ${this.serverPort}`,
+            `Please manually start the server by running: node packages/ios/bin/server.js ${this.serverPort}`,
         );
       }
     }

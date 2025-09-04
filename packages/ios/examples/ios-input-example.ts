@@ -1,12 +1,12 @@
 import { agentFromPyAutoGUI } from '../src/agent';
-import "dotenv/config";
+import 'dotenv/config';
 
 Promise.resolve(
-    (async () => {
-        const agent = await agentFromPyAutoGUI();
+  (async () => {
+    const agent = await agentFromPyAutoGUI();
 
-        // 👀 run YAML with agent
-        const { result } = await agent.runYaml(`
+    // 👀 run YAML with agent
+    const { result } = await agent.runYaml(`
 tasks:
   - name: Open music app and search Coldplay
     flow:
@@ -27,6 +27,6 @@ tasks:
       - aiAction: "返回Home"
 `);
 
-        console.log(result);
-    })()
+    console.log(result);
+  })(),
 );
