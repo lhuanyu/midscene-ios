@@ -1,6 +1,6 @@
 {
   "name": "midscene-ios-playground",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "iOS playground for Midscene",
   "main": "./dist/lib/index.js",
   "types": "./dist/types/index.d.ts",
@@ -20,7 +20,7 @@
     "build:watch": "modern build -w -c ./modern.config.ts --no-clear"
   },
   "dependencies": {
-    "midscene-ios": "workspace:*",
+    "midscene-ios": "^0.1.0",
     "@midscene/playground": "^0.27.6",
     "@midscene/shared": "^0.27.6",
     "@midscene/web": "^0.27.6",
