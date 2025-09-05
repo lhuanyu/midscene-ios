@@ -26,6 +26,7 @@ import {
 } from '@midscene/shared/img';
 import { enableDebug, getDebug } from '@midscene/shared/logger';
 import { type ScreenInfo, getScreenSize } from './utils';
+import { debug } from 'node:console';
 
 export const debugPage = getDebug('ios:device');
 export interface iOSDeviceOpt extends IOSDeviceInputOpt {
@@ -47,16 +48,16 @@ export type IOSDeviceInputOpt = {
 
 export interface PyAutoGUIAction {
   action:
-    | 'click'
-    | 'longpress'
-    | 'move'
-    | 'drag'
-    | 'type'
-    | 'key'
-    | 'hotkey'
-    | 'sleep'
-    | 'screenshot'
-    | 'scroll';
+  | 'click'
+  | 'longpress'
+  | 'move'
+  | 'drag'
+  | 'type'
+  | 'key'
+  | 'hotkey'
+  | 'sleep'
+  | 'screenshot'
+  | 'scroll';
   x?: number;
   y?: number;
   x2?: number;
@@ -158,9 +159,9 @@ export class iOSDevice implements AbstractInterface {
         const element = param.locate;
         const startingPoint = element
           ? {
-              left: element.center[0],
-              top: element.center[1],
-            }
+            left: element.center[0],
+            top: element.center[1],
+          }
           : undefined;
         const scrollToEventName = param?.scrollType;
         if (scrollToEventName === 'untilTop') {
@@ -337,7 +338,7 @@ export class iOSDevice implements AbstractInterface {
       } catch (startError: any) {
         throw new Error(
           `Failed to auto-start Python server: ${startError.message}. ` +
-            `Please manually start the server by running: node packages/ios/bin/server.js ${this.serverPort}`,
+          `Please manually start the server by running: node packages/ios/bin/server.js ${this.serverPort}`,
         );
       }
     }
@@ -738,13 +739,16 @@ export class iOSDevice implements AbstractInterface {
 
   async screenshotBase64(): Promise<string> {
     debugPage('screenshotBase64 begin');
+    debugPage('Mirror config exists:', !!this.options?.mirrorConfig);
 
     try {
       // Use PyAutoGUI server's screenshot functionality for iOS mirroring
       if (this.options?.mirrorConfig) {
+        debugPage('Using PyAutoGUI server for iOS mirroring screenshots');
         const result = await this.executePyAutoGUIAction({
           action: 'screenshot',
         });
+        debugPage('PyAutoGUI screenshot result:', result);
 
         if (result.status === 'ok' && result.path) {
           // Read the screenshot file and convert to base64
@@ -752,6 +756,7 @@ export class iOSDevice implements AbstractInterface {
 
           // Get iOS device dimensions for resizing
           const { width, height } = await this.size();
+          debugPage('About to resize image, dimensions:', { width, height });
 
           // Resize to match iOS device dimensions
           const { buffer, format } = await resizeAndConvertImgBuffer(
@@ -762,10 +767,12 @@ export class iOSDevice implements AbstractInterface {
               height,
             },
           );
+          debugPage('convert png to new format:', format);
 
           // Clean up temporary file
           try {
             await fs.promises.unlink(result.path);
+
           } catch (cleanupError) {
             debugPage('Failed to cleanup temp screenshot file:', cleanupError);
           }
