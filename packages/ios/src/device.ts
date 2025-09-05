@@ -24,7 +24,7 @@ import {
   createImgBase64ByFormat,
   resizeAndConvertImgBuffer,
 } from '@midscene/shared/img';
-import { getDebug } from '@midscene/shared/logger';
+import { enableDebug, getDebug } from '@midscene/shared/logger';
 import { type ScreenInfo, getScreenSize } from './utils';
 
 export const debugPage = getDebug('ios:device');
@@ -371,6 +371,9 @@ export class iOSDevice implements AbstractInterface {
   }
 
   private async startPyAutoGUIServer(): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
     try {
       const { spawn } = await import('node:child_process');
       const serverScriptPath = path.resolve(__dirname, '../../bin/server.js');
@@ -812,6 +815,10 @@ export class iOSDevice implements AbstractInterface {
   private async executePyAutoGUIAction(
     action: PyAutoGUIAction,
   ): Promise<PyAutoGUIResult> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
+
     try {
       const fetch = (await import('node-fetch')).default;
 
@@ -1252,23 +1259,36 @@ export class iOSDevice implements AbstractInterface {
   }
 
   async back(): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
     // For iOS/macOS, we can simulate Command+[ or use system back gesture
     await this.keyboardPress('cmd+[');
   }
 
   async home(): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
     // For iOS simulator/mirroring, CMD+1 opens home screen
     debugPage('Navigating to home screen using CMD+1');
     await this.keyboardPress('cmd+1');
   }
 
   async recentApps(): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
     // For iOS simulator/mirroring, CMD+2 opens app switcher
     debugPage('Opening app switcher using CMD+2');
     await this.keyboardPress('cmd+2');
   }
 
   async longPress(x: number, y: number, duration?: number): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
+
     if (this.options?.mirrorConfig) {
       await this.executePyAutoGUIAction({
         action: 'longpress',
@@ -1292,6 +1312,10 @@ export class iOSDevice implements AbstractInterface {
     distance?: number,
     duration?: number,
   ): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
+
     const screenSize = await this.size();
     const start = startPoint || {
       left: screenSize.width / 2,
@@ -1330,6 +1354,10 @@ export class iOSDevice implements AbstractInterface {
     distance?: number,
     duration?: number,
   ): Promise<void> {
+    if (this.destroyed) {
+      throw new Error('Device is destroyed');
+    }
+
     const screenSize = await this.size();
     const start = startPoint || {
       left: screenSize.width / 2,
@@ -1364,6 +1392,9 @@ export class iOSDevice implements AbstractInterface {
   }
 
   async destroy(): Promise<void> {
+    if (this.destroyed) {
+      return;
+    }
     debugPage('destroy iOS device');
     this.destroyed = true;
 

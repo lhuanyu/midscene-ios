@@ -4,6 +4,23 @@ const { iOSDevice, iOSAgent } = require('midscene-ios');
 const { PLAYGROUND_SERVER_PORT } = require('@midscene/shared/constants');
 const { PlaygroundServer } = require('@midscene/playground');
 
+// Enable all debug logs for iOS and related modules
+// Users can set VERBOSE=true for even more detailed logs
+const debugPatterns = ['ios:*', 'midscene:*', 'playground:*'];
+const excludePatterns = ['-express:*']; // Exclude noisy express router logs
+
+if (process.env.VERBOSE === 'true') {
+  debugPatterns.push('*');
+  console.log('🔍 Verbose logging enabled - all debug output will be shown');
+}
+
+// Combine include and exclude patterns
+const allPatterns = [...debugPatterns, ...excludePatterns];
+process.env.DEBUG = process.env.DEBUG || allPatterns.join(',');
+// Import enableDebug and enable it
+const { enableDebug } = require('@midscene/shared/logger');
+enableDebug();
+
 const staticDir = path.join(__dirname, '..', 'static');
 const playgroundServer = new PlaygroundServer(iOSDevice, iOSAgent, staticDir);
 
@@ -64,6 +81,7 @@ const startAutoServer = async () => {
       env: {
         ...process.env,
         NODE_ENV: 'production',
+        DEBUG: process.env.DEBUG, // Ensure debug environment is passed to child process
       },
     });
 
@@ -71,29 +89,25 @@ const startAutoServer = async () => {
     autoServerProcess.stdout.on('data', (data) => {
       const output = data.toString().trim();
       if (!output) return;
-      console.log(`[PyAutoGUI] ${output}`);
+      console.log(`[PyAutoGUI Server] ${output}`);
     });
 
     autoServerProcess.stderr.on('data', (data) => {
       const output = data.toString().trim();
       if (!output) return;
-      // Only surface real errors
-      const isRealError =
-        /Traceback|Exception|Error|Trace|Failed|CRITICAL/i.test(output);
-      if (isRealError) {
-        console.error(`[PyAutoGUI Error] ${output}`);
-      } else {
-        console.error(`[PyAutoGUI] ${output}`);
-      }
+      // Surface all output for debugging
+      console.log(`[PyAutoGUI Server Error] ${output}`);
     });
 
     autoServerProcess.on('error', (error) => {
-      console.error('Failed to start PyAutoGUI server:', error);
+      console.error('❌ Failed to start PyAutoGUI server:', error);
     });
 
     autoServerProcess.on('close', (code) => {
       if (code !== 0) {
-        console.error(`PyAutoGUI server exited with code ${code}`);
+        console.error(`❌ PyAutoGUI server exited with code ${code}`);
+      } else {
+        console.log('✅ PyAutoGUI server closed cleanly');
       }
       autoServerProcess = null;
     });
@@ -116,53 +130,87 @@ const startAutoServer = async () => {
       return false;
     }
   } catch (error) {
-    console.error('Error starting auto server:', error);
+    console.error('❌ Error starting auto server:', error);
     lastStartFailed = true;
     return false;
   }
 };
 
+/**
+ * Monitor server health and log status
+ */
+const monitorServerHealth = () => {
+  const interval = setInterval(async () => {
+    const isRunning = await checkAutoServerRunning();
+    if (!isRunning && autoServerProcess) {
+      console.warn(
+        '⚠️  PyAutoGUI server appears to be down, attempting restart...',
+      );
+      await startAutoServer();
+    }
+  }, 30000); // Check every 30 seconds
+
+  // Clean up interval on shutdown
+  process.on('exit', () => clearInterval(interval));
+  process.on('SIGTERM', () => clearInterval(interval));
+  process.on('SIGINT', () => clearInterval(interval));
+};
+
 const main = async () => {
   try {
+    console.log('🚀 Starting Midscene iOS Playground...');
+    console.log(`📋 Debug mode enabled: ${process.env.DEBUG}`);
+
     // Start auto server first
     await startAutoServer();
 
+    // Start server health monitoring
+    monitorServerHealth();
+
     await playgroundServer.launch(PLAYGROUND_SERVER_PORT);
     console.log(
-      `Midscene iOS Playground server is running on http://localhost:${playgroundServer.port}`,
+      `✅ Midscene iOS Playground server is running on http://localhost:${playgroundServer.port}`,
     );
+
+    // Test iOS device debug logging to show it's working
+    if (process.env.DEBUG?.includes('ios:')) {
+      console.log(
+        '🔍 Debug mode detected - will show iOS device logs when operations are performed',
+      );
+    }
 
     // Automatically open browser
     if (process.env.NODE_ENV !== 'test') {
       try {
         const { default: open } = await import('open');
         await open(`http://localhost:${playgroundServer.port}`);
+        console.log('🌐 Browser opened automatically');
       } catch (error) {
         console.log(
-          'Could not open browser automatically. Please visit the URL manually.',
+          '⚠️  Could not open browser automatically. Please visit the URL manually.',
         );
       }
     }
   } catch (error) {
-    console.error('Failed to start iOS playground server:', error);
+    console.error('❌ Failed to start iOS playground server:', error);
     process.exit(1);
   }
-};
-
-// Handle graceful shutdown
+}; // Handle graceful shutdown
 const cleanup = () => {
-  console.log('Shutting down gracefully...');
+  console.log('🔄 Shutting down gracefully...');
 
   if (playgroundServer) {
+    console.log('🛑 Closing playground server...');
     playgroundServer.close();
   }
 
   if (autoServerProcess) {
-    console.log('Stopping PyAutoGUI server...');
+    console.log('🛑 Stopping PyAutoGUI server...');
     autoServerProcess.kill('SIGTERM');
     autoServerProcess = null;
   }
 
+  console.log('✅ Cleanup completed');
   process.exit(0);
 };
 

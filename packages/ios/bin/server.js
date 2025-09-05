@@ -24,6 +24,7 @@ const server = spawn('python3', [serverPath, port], {
   env: {
     ...process.env,
     PYTHONUNBUFFERED: '1',
+    DEBUG: process.env.DEBUG || 'ios:*, midscene:*', // Pass debug environment to Python server
   },
 });
 
