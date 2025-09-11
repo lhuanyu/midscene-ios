@@ -1,6 +1,6 @@
 {
   "name": "midscene-ios",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Midscene iOS automation SDK and playground",
   "private": true,
   "scripts": {
