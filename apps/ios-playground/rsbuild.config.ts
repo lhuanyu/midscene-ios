@@ -7,9 +7,13 @@ import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
 
+// Read version from package.json
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
+const version = packageJson.version || '0.1.0';
+
 const copyAndroidPlaygroundStatic = () => ({
   name: 'copy-android-playground-static',
-  setup(api) {
+  setup(api: any) {
     api.onAfterBuild(async () => {
       const srcDir = path.join(__dirname, 'dist');
       const destDir = path.join(
@@ -41,6 +45,9 @@ export default defineConfig({
       source: {
         entry: {
           index: './src/index.tsx',
+        },
+        define: {
+          __APP_VERSION__: JSON.stringify(version),
         },
       },
       output: {

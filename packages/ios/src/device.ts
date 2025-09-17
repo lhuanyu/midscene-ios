@@ -338,7 +338,7 @@ export class iOSDevice implements AbstractInterface {
       } catch (startError: any) {
         throw new Error(
           `Failed to auto-start Python server: ${startError.message}. ` +
-          `Please manually start the server by running: node packages/ios/bin/server.js ${this.serverPort}`,
+          `Please manually start the server by running: python packages/ios/idb/auto_server.py ${this.serverPort}`,
         );
       }
     }
@@ -377,22 +377,23 @@ export class iOSDevice implements AbstractInterface {
     }
     try {
       const { spawn } = await import('node:child_process');
-      const serverScriptPath = path.resolve(__dirname, '../../bin/server.js');
+      const serverScriptPath = path.resolve(__dirname, '../idb/auto_server.py');
 
       debugPage(
-        `Starting PyAutoGUI server using: node ${serverScriptPath} ${this.serverPort}`,
+        `Starting PyAutoGUI server using: python ${serverScriptPath} ${this.serverPort}`,
       );
 
       // Start server process in background (similar to server.js background mode)
       // Start server process (non-detached so parent can reliably terminate it)
       this.serverProcess = spawn(
-        'node',
+        'python',
         [serverScriptPath, this.serverPort.toString()],
         {
           detached: false,
-          stdio: 'pipe', // Capture output
+          stdio: ['ignore', 'pipe', 'pipe'], // Ignore stdin, capture stdout/stderr
           env: {
             ...process.env,
+            PYTHONUNBUFFERED: '1', // Ensure Python output is not buffered
           },
         },
       );
@@ -421,16 +422,38 @@ export class iOSDevice implements AbstractInterface {
         },
       );
 
-      // Capture and log server output
+      // Capture and log server output with error handling
       if (this.serverProcess.stdout) {
         this.serverProcess.stdout.on('data', (data: Buffer) => {
-          debugPage(`Server stdout: ${data.toString().trim()}`);
+          try {
+            const output = data.toString().trim();
+            if (output) {
+              debugPage(`Server stdout: ${output}`);
+            }
+          } catch (err) {
+            // Ignore stdout processing errors
+          }
+        });
+
+        this.serverProcess.stdout.on('error', (err: any) => {
+          debugPage(`Server stdout error: ${err.message}`);
         });
       }
 
       if (this.serverProcess.stderr) {
         this.serverProcess.stderr.on('data', (data: Buffer) => {
-          debugPage(`Server stderr: ${data.toString().trim()}`);
+          try {
+            const output = data.toString().trim();
+            if (output) {
+              debugPage(`Server stderr: ${output}`);
+            }
+          } catch (err) {
+            // Ignore stderr processing errors
+          }
+        });
+
+        this.serverProcess.stderr.on('error', (err: any) => {
+          debugPage(`Server stderr error: ${err.message}`);
         });
       }
 
@@ -655,6 +678,44 @@ export class iOSDevice implements AbstractInterface {
       throw new Error(`Failed to get configuration: ${response.status}`);
     }
     return await response.json();
+  }
+
+  /**
+   * Bring iPhone Mirroring app to foreground and re-detect window position
+   */
+  async activateAndDetectMirror(): Promise<void> {
+    try {
+      debugPage('Bringing iPhone Mirroring app to foreground...');
+
+      // Activate the mirroring application using AppleScript
+      const { exec } = await import('node:child_process');
+      const { promisify } = await import('node:util');
+      const execAsync = promisify(exec);
+
+      await execAsync(
+        `osascript -e 'tell application "iPhone Mirroring" to activate'`,
+      );
+      debugPage('iPhone Mirroring app activated');
+
+      // Wait for app to be ready
+      await sleep(1500);
+
+      // Re-detect and configure the mirror position
+      debugPage('Re-detecting iPhone Mirroring window position...');
+      const mirrorConfig = await this.detectAndConfigureIOSMirror();
+
+      if (mirrorConfig) {
+        await this.configureIOSMirror(mirrorConfig);
+        debugPage('iPhone Mirroring window position updated successfully');
+      } else {
+        debugPage('Warning: Could not detect iPhone Mirroring window');
+      }
+    } catch (error: any) {
+      debugPage(
+        `Warning: Failed to activate and detect iPhone Mirroring app: ${error.message}`,
+      );
+      // Don't throw - this is not critical for operation
+    }
   }
 
   public async launch(uri: string): Promise<iOSDevice> {

@@ -1,6 +1,6 @@
 const path = require('node:path');
 const { spawn } = require('node:child_process');
-const { iOSDevice, iOSAgent } = require('midscene-ios');
+const { iOSDevice, agentFromPyAutoGUI } = require('midscene-ios');
 const { PLAYGROUND_SERVER_PORT } = require('@midscene/shared/constants');
 const { PlaygroundServer } = require('@midscene/playground');
 
@@ -22,7 +22,9 @@ const { enableDebug } = require('@midscene/shared/logger');
 enableDebug();
 
 const staticDir = path.join(__dirname, '..', 'static');
-const playgroundServer = new PlaygroundServer(iOSDevice, iOSAgent, staticDir);
+// Create device instance instead of using class
+const device = new iOSDevice();
+let playgroundServer;
 
 // Auto server management
 let autoServerProcess = null;
@@ -96,7 +98,7 @@ const startAutoServer = async () => {
       const output = data.toString().trim();
       if (!output) return;
       // Surface all output for debugging
-      console.log(`[PyAutoGUI Server Error] ${output}`);
+      console.log(`[PyAutoGUI Server] ${output}`);
     });
 
     autoServerProcess.on('error', (error) => {
@@ -167,7 +169,50 @@ const main = async () => {
     // Start server health monitoring
     monitorServerHealth();
 
+    // Connect device and create agent
+    await device.connect();
+    const agent = await agentFromPyAutoGUI();
+
+    // Create playground server with device and agent
+    playgroundServer = new PlaygroundServer(device, agent, staticDir);
+
     await playgroundServer.launch(PLAYGROUND_SERVER_PORT);
+
+    // Add custom route for activating iPhone Mirroring app after launching
+    // Access the underlying Express app directly
+    if (playgroundServer.app) {
+      playgroundServer.app.post('/activate-mirror', async (req, res) => {
+        try {
+          console.log('🔍 Received request to activate iPhone Mirroring app');
+          await device.activateAndDetectMirror();
+          res.json({ status: 'success', message: 'iPhone Mirroring app activated and window position detected' });
+        } catch (error) {
+          console.error('❌ Failed to activate iPhone Mirroring app:', error);
+          res.status(500).json({
+            status: 'error',
+            message: error.message || 'Failed to activate iPhone Mirroring app'
+          });
+        }
+      });
+    } else if (playgroundServer._app) {
+      // Fallback to private property if public one doesn't exist
+      playgroundServer._app.post('/activate-mirror', async (req, res) => {
+        try {
+          console.log('🔍 Received request to activate iPhone Mirroring app');
+          await device.activateAndDetectMirror();
+          res.json({ status: 'success', message: 'iPhone Mirroring app activated and window position detected' });
+        } catch (error) {
+          console.error('❌ Failed to activate iPhone Mirroring app:', error);
+          res.status(500).json({
+            status: 'error',
+            message: error.message || 'Failed to activate iPhone Mirroring app'
+          });
+        }
+      });
+    } else {
+      console.warn('⚠️  Unable to add custom route - Express app not accessible');
+    }
+
     console.log(
       `✅ Midscene iOS Playground server is running on http://localhost:${playgroundServer.port}`,
     );

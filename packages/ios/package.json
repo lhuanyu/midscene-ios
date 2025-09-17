@@ -35,9 +35,9 @@
     "prepack": "npm run build"
   },
   "dependencies": {
-    "@midscene/core": "^0.27.6",
-    "@midscene/shared": "^0.27.6",
-    "@midscene/web": "^0.27.6",
+    "@midscene/core": "^0.28.6",
+    "@midscene/shared": "^0.28.6",
+    "@midscene/web": "^0.28.6",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {

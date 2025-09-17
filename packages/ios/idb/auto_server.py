@@ -11,6 +11,14 @@ import io
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+# Safe print function to handle broken pipe errors
+def safe_print(*args, **kwargs):
+    try:
+        print(*args, **kwargs)
+    except BrokenPipeError:
+        # Ignore broken pipe errors when stdout is closed
+        pass
+
 # Configure pyautogui
 pyautogui.FAILSAFE = True
 pyautogui.PAUSE = 0.1
@@ -232,9 +240,13 @@ def setup_ios_mapping(mirror_x, mirror_y, mirror_width, mirror_height):
         "estimated_ios_height": best_match["height"]
     })
     
-    print(f"📱 iOS mapping configured: Estimated {best_match['name']} ({best_match['width']}x{best_match['height']}) -> {mirror_width}x{mirror_height} at ({mirror_x},{mirror_y})")
-    print(f"   Aspect ratio: {mirror_aspect_ratio:.3f}, Device: {best_match['name']}")
-    print(f"   ✅ iOS coordinate transformation is now ENABLED")
+    try:
+        print(f"📱 iOS mapping configured: Estimated {best_match['name']} ({best_match['width']}x{best_match['height']}) -> {mirror_width}x{mirror_height} at ({mirror_x},{mirror_y})")
+        print(f"   Aspect ratio: {mirror_aspect_ratio:.3f}, Device: {best_match['name']}")
+        print(f"   ✅ iOS coordinate transformation is now ENABLED")
+    except BrokenPipeError:
+        # Ignore broken pipe errors when stdout is closed
+        pass
 
 def transform_ios_coordinates(ios_x, ios_y):
     """Transform iOS coordinates to macOS screen coordinates"""
@@ -593,6 +605,42 @@ def get_config():
         "status": "ok",
         "config": ios_config
     })
+
+@app.route("/activate-mirror", methods=["POST"])
+def activate_mirror():
+    """Activate iPhone Mirroring app and re-detect window position"""
+    try:
+        safe_print("🔍 Activating iPhone Mirroring app...")
+        
+        # Activate the iPhone Mirroring app using AppleScript
+        applescript_activate = '''
+        tell application "iPhone Mirroring" to activate
+        '''
+        
+        result = subprocess.run(['osascript', '-e', applescript_activate], 
+                              capture_output=True, text=True, timeout=10)
+        
+        if result.returncode != 0:
+            safe_print(f"⚠️ Warning: Failed to activate iPhone Mirroring app: {result.stderr}")
+        else:
+            safe_print("✅ iPhone Mirroring app activated")
+        
+        # Wait a moment for the app to come to foreground
+        time.sleep(1.5)
+        
+        # Re-detect and configure the mirror position
+        safe_print("🔍 Re-detecting window position...")
+        detect_result = detect_and_configure_ios_mirror()
+        
+        return jsonify(detect_result)
+        
+    except Exception as e:
+        safe_print(f"❌ Error activating mirror: {str(e)}")
+        return jsonify({
+            "status": "error",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        })
 
 @app.route("/run", methods=["POST"])
 def run_actions():

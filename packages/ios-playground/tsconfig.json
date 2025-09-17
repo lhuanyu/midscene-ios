@@ -6,7 +6,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "moduleResolution": "node",
     "target": "es6",
     "resolveJsonModule": true,
@@ -18,20 +20,12 @@
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["bin/**/*"],
-  "references": [
-    {
-      "path": "../ios"
-    },
-    {
-      "path": "../shared"
-    },
-    {
-      "path": "../playground"
-    },
-    {
-      "path": "../web-integration"
-    }
-  ]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "bin/**/*"
+  ],
+  "references": []
 }

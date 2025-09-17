@@ -8,7 +8,10 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "rootDir": "src",
@@ -16,21 +19,17 @@
     "strict": true,
     "module": "ES2020",
     "target": "es2020",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "composite": true,
     "declarationDir": "dist/types"
   },
-  "exclude": ["**/node_modules"],
-  "include": ["src"],
-  "references": [
-    {
-      "path": "../core"
-    },
-    {
-      "path": "../shared"
-    },
-    {
-      "path": "../web-integration"
-    }
-  ]
+  "exclude": [
+    "**/node_modules"
+  ],
+  "include": [
+    "src"
+  ],
+  "references": []
 }

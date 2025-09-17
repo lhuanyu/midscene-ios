@@ -19,18 +19,10 @@ body {
   overflow: hidden;
 }
 
-.app-grid-layout {
+/* Panel group styles */
+.react-resizable-panels-group {
   height: 100%;
-  display: flex;
-
-  .ant-row {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .app-panel {
@@ -172,10 +164,12 @@ body {
   }
 }
 
-.resize-handle {
+/* Panel resize handle */
+.panel-resize-handle {
   width: 2px;
   background-color: #f0f0f0;
   transition: background-color 0.2s;
+  cursor: col-resize;
 
   &:hover {
     background-color: #1677ff;

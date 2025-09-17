@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch iOS Playground",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "cd packages/ios-playground && pnpm run dev:server",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch iOS Playground (Verbose)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "cd packages/ios-playground && VERBOSE=true pnpm run dev:server",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

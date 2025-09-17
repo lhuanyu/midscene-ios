@@ -50,7 +50,7 @@ export default function IOSDevice({
     const message = `Please start the PyAutoGUI server manually:
 
 1. Open Terminal
-2. Run: npx midscene-ios server
+2. Run: npx @midscene/ios server
 3. Make sure iPhone Mirroring app is open and connected`;
 
     alert(message);

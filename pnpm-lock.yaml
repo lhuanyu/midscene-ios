@@ -58,17 +58,20 @@ importers:
         specifier: ^5.3.1
         version: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@midscene/core':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/playground':
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       '@midscene/shared':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)
       '@midscene/visualizer':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       '@midscene/web':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       antd:
         specifier: ^5.21.6
         version: 5.27.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -84,6 +87,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      react-resizable-panels:
+        specifier: 2.0.22
+        version: 2.0.22(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
         specifier: ^1.3.22
@@ -122,14 +128,14 @@ importers:
   packages/ios:
     dependencies:
       '@midscene/core':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       '@midscene/shared':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)
       '@midscene/web':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -156,14 +162,14 @@ importers:
   packages/ios-playground:
     dependencies:
       '@midscene/playground':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       '@midscene/shared':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)
       '@midscene/web':
-        specifier: ^0.27.6
-        version: 0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: ^0.28.6
+        version: 0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       cors:
         specifier: 2.8.5
         version: 2.8.5
@@ -171,8 +177,8 @@ importers:
         specifier: ^4.21.2
         version: 4.21.2
       midscene-ios:
-        specifier: ^0.1.4
-        version: 0.1.4(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+        specifier: workspace:^
+        version: link:../ios
       open:
         specifier: 10.1.0
         version: 10.1.0
@@ -1738,30 +1744,30 @@ packages:
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
 
-  '@midscene/core@0.27.6':
-    resolution: {integrity: sha512-jqRBq1XYbzZfLswAyDADExeLgyQ6rZyQ3gehF66roCbJ4UR1vT2RkWC6VdpNNcAC/8HRz+FDRAr5bN1/FWUZVA==}
+  '@midscene/core@0.28.9':
+    resolution: {integrity: sha512-zNZbZa0D1em4ZhGWuQYiKa5mO6GAlsgIel3ubwNkkfnymO5Jf/hOdgVjHoLL7yl46o5FzTSSoewDwhWUjfJbjQ==}
     engines: {node: '>=18.0.0'}
 
-  '@midscene/playground@0.27.6':
-    resolution: {integrity: sha512-AzwJYCqo4wkNLccBDOwANRh8q5ula17CHTcKPu/xDJwGevqxlQTjj3jeJprZXkEyX8ukrqwtN33tVAWyan1Nuw==}
+  '@midscene/playground@0.28.9':
+    resolution: {integrity: sha512-o7qwH6Z2gtNq+mBst+G+eKz9lZfqUNP9i0UrwC0Ebz8YR3OqYa/qeSF60IUODEmfyiJnjOBNgXSHrIsuCEzWcQ==}
 
-  '@midscene/recorder@0.27.6':
-    resolution: {integrity: sha512-HivZv0oBlHMHNIG8877cJ9tv53I5MFnxqCUHnil9q0CJJcfVgFVz1OAHDA1TGjZ1hGXSwk5E/VQW0J0SnhFTew==}
+  '@midscene/recorder@0.28.9':
+    resolution: {integrity: sha512-6URUR0MdG0r4qqAMQLL6GVInBqDBM7k50dcL3Mxj80kn5vOo/2+PIRI7pUT31NJWeregMVUcEoJViJ0JntiT0Q==}
     peerDependencies:
       react: 18.3.1
       react-dom: 18.3.1
 
-  '@midscene/shared@0.27.6':
-    resolution: {integrity: sha512-M0i/E4HMfXHPU1o1lCT83k0sI6cYPa7cBrewBf6Yk25T9ArDRGCsZaXBlk4wfi83+n57FTIRwLJCFm+1HdfqPQ==}
+  '@midscene/shared@0.28.9':
+    resolution: {integrity: sha512-tatmWOnsWwVaReyxDBuPBtc2/KNXuYTFPFH1y2Y+m3TgSjaaF3BdoLmH23TGc2JEdwL1ZymaZYcZf3tOXmmDAQ==}
 
-  '@midscene/visualizer@0.27.6':
-    resolution: {integrity: sha512-3pbeudKj422REPOctQwcp567c5JF/e1RZuVBWnVInuZARALVfQV9cbJqH3n1nuJQf4ul+uP5vTj8D/yE7oo5Hw==}
+  '@midscene/visualizer@0.28.9':
+    resolution: {integrity: sha512-MXhBa4jBlUh+5yeP34XkW5Tm67oBrHm9nFPgNnVzO4CFK60A6INTfl7GNfcjxwxRSjbe8PM1yHrNr72UxO96RQ==}
     peerDependencies:
       react: 18.3.1
       react-dom: '>=19.1.0'
 
-  '@midscene/web@0.27.6':
-    resolution: {integrity: sha512-1n/fln4XyuBJ8gAW5JZ2A2gMRXPZD6jI/k14in2HLsE+dEC79tdstbki2/YjwpU+rimgKHx6pj5T0kvcPcvwQg==}
+  '@midscene/web@0.28.9':
+    resolution: {integrity: sha512-QvNK7k2JfQkJbF4beUiT+ctlwZ4dDZdgAURsjk0qMLxl6qBpmZLlZS38dC+20cDpQTMnpOQTPA6uPmCTDgy+Hw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -4149,10 +4155,6 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
-  midscene-ios@0.1.4:
-    resolution: {integrity: sha512-pda2PKIv1LhmvxnujK/2egmpRP1XchmU+K5P3Si3NujA8yBjL9Ji27oCWnLYgB5MikVPrwhmRVDWfHcnvJ2pGA==}
-    hasBin: true
-
   miller-rabin@4.0.1:
     resolution: {integrity: sha512-115fLhvZVqWwHPbClyntxEVfVDfl9DLLTuJvq3g2O/Oxi8AiNouAHvDSzHS0viUJc+V5vm3eq91Xwqn9dp4jRA==}
     hasBin: true
@@ -4907,6 +4909,12 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
+  react-resizable-panels@2.0.22:
+    resolution: {integrity: sha512-G8x8o7wjQxCG+iF4x4ngKVBpe0CY+DAZ/SaiDoqBEt0yuKJe9OE/VVYMBMMugQ3GyQ65NnSJt23tujlaZZe75A==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -5513,6 +5521,10 @@ packages:
 
   uuid@10.0.0:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
   uuid@8.3.2:
@@ -7179,14 +7191,14 @@ snapshots:
       '@jsonjoy.com/codegen': 1.0.0(tslib@2.8.1)
       tslib: 2.8.1
 
-  '@langchain/core@0.3.26(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))':
+  '@langchain/core@0.3.26(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.21
-      langsmith: 0.2.15(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
+      langsmith: 0.2.15(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -7212,19 +7224,19 @@ snapshots:
       globby: 11.1.0
       read-yaml-file: 1.1.0
 
-  '@midscene/core@0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
+  '@midscene/core@0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
     dependencies:
       '@anthropic-ai/sdk': 0.33.1(encoding@0.1.13)
       '@azure/identity': 4.5.0
-      '@langchain/core': 0.3.26(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
-      '@midscene/recorder': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
+      '@langchain/core': 0.3.26(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
+      '@midscene/recorder': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@midscene/shared': 0.28.9(encoding@0.1.13)
       '@ui-tars/action-parser': 1.2.3
       dotenv: 16.4.5
       https-proxy-agent: 7.0.2
       js-yaml: 4.1.0
       jsonrepair: 3.12.0
-      langsmith: 0.3.7(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3))
+      langsmith: 0.3.7(openai@4.81.0(encoding@0.1.13)(zod@3.24.3))
       openai: 4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)
       semver: 7.5.2
       socks-proxy-agent: 8.0.4
@@ -7239,13 +7251,14 @@ snapshots:
       - supports-color
       - ws
 
-  '@midscene/playground@0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
+  '@midscene/playground@0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
     dependencies:
-      '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
-      cors: 2.8.5
+      '@midscene/core': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/shared': 0.28.9(encoding@0.1.13)
       dotenv: 16.4.5
       express: 4.21.2
+      open: 10.1.0
+      uuid: 11.1.0
     transitivePeerDependencies:
       - date-fns
       - encoding
@@ -7256,10 +7269,10 @@ snapshots:
       - supports-color
       - ws
 
-  '@midscene/recorder@0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@midscene/recorder@0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@ant-design/icons': 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
+      '@midscene/shared': 0.28.9(encoding@0.1.13)
       antd: 5.27.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dayjs: 1.11.18
       react: 18.3.1
@@ -7271,7 +7284,7 @@ snapshots:
       - moment
       - supports-color
 
-  '@midscene/shared@0.27.6(encoding@0.1.13)':
+  '@midscene/shared@0.28.9(encoding@0.1.13)':
     dependencies:
       '@silvia-odwyer/photon': 0.3.3
       '@silvia-odwyer/photon-node': 0.3.3
@@ -7279,34 +7292,43 @@ snapshots:
       jimp: 0.22.12(debug@4.4.0)(encoding@0.1.13)
       js-sha256: 0.11.0
       sharp: 0.34.3
+      uuid: 11.1.0
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  '@midscene/visualizer@0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
+  '@midscene/visualizer@0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
     dependencies:
       '@ant-design/icons': 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/playground': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
+      '@midscene/core': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/playground': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/shared': 0.28.9(encoding@0.1.13)
+      '@midscene/web': 0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
       antd: 5.27.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       buffer: 6.0.3
       dayjs: 1.11.18
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
+      - '@playwright/test'
+      - bufferutil
       - date-fns
+      - debug
       - encoding
       - luxon
       - moment
+      - playwright
+      - puppeteer
       - supports-color
+      - utf-8-validate
       - ws
 
-  '@midscene/web@0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
+  '@midscene/web@0.28.9(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)':
     dependencies:
-      '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/playground': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
+      '@midscene/core': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/playground': 0.28.9(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
+      '@midscene/shared': 0.28.9(encoding@0.1.13)
+      cors: 2.8.5
       dayjs: 1.11.18
       dotenv: 16.4.5
       http-server: 14.1.1
@@ -9895,7 +9917,7 @@ snapshots:
       jwa: 2.0.1
       safe-buffer: 5.2.1
 
-  langsmith@0.2.15(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)):
+  langsmith@0.2.15(openai@4.81.0(encoding@0.1.13)(zod@3.24.3)):
     dependencies:
       '@types/uuid': 10.0.0
       commander: 10.0.1
@@ -9906,7 +9928,7 @@ snapshots:
     optionalDependencies:
       openai: 4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)
 
-  langsmith@0.3.7(openai@4.81.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.3)):
+  langsmith@0.3.7(openai@4.81.0(encoding@0.1.13)(zod@3.24.3)):
     dependencies:
       '@types/uuid': 10.0.0
       chalk: 4.1.2
@@ -10080,28 +10102,6 @@ snapshots:
     dependencies:
       braces: 3.0.3
       picomatch: 2.3.1
-
-  midscene-ios@0.1.4(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3):
-    dependencies:
-      '@midscene/core': 0.27.6(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      '@midscene/shared': 0.27.6(encoding@0.1.13)
-      '@midscene/web': 0.27.6(encoding@0.1.13)(playwright@1.55.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(ws@8.18.3)
-      node-fetch: 3.3.2
-    transitivePeerDependencies:
-      - '@playwright/test'
-      - bufferutil
-      - date-fns
-      - debug
-      - encoding
-      - luxon
-      - moment
-      - playwright
-      - puppeteer
-      - react
-      - react-dom
-      - supports-color
-      - utf-8-validate
-      - ws
 
   miller-rabin@4.0.1:
     dependencies:
@@ -10974,6 +10974,11 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
+  react-resizable-panels@2.0.22(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
@@ -11660,6 +11665,8 @@ snapshots:
   utils-merge@1.0.1: {}
 
   uuid@10.0.0: {}
+
+  uuid@11.1.0: {}
 
   uuid@8.3.2: {}
 
