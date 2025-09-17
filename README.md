@@ -64,6 +64,14 @@ pnpm run build
 
 ### 5. Run iOS Playground
 
+Create an .env file.
+
+```bash
+OPENAI_BASE_URL="xxxx"
+OPENAI_API_KEY="xxxx"
+MIDSCENE_MODEL_NAME="xxxx"
+```
+Run with npx.
 ```bash
 npx midscene-ios-playground
 ```
